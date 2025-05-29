@@ -14,7 +14,7 @@ redirect_from:
 
 ## 下载
 
-版本：0.9.1 点击[链接]([https://wwwi.lanzouo.com/iHXVR2qqdnvc](https://wwwi.lanzouo.com/iVm1H2xi3sid))下载
+版本：0.9.1 点击[链接](https://wwwi.lanzouo.com/iVm1H2xi3sid)下载
 
 版本：0.8.0 出现了问题无法使用，暂时无法下载……
 
