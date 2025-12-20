@@ -227,7 +227,7 @@ redirect_from:
 
 <div class="version-card">
     <h2 class="version-title">版本：0.10.0</h2>
-    <a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">点击下载</a>
+    <a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
         <ul class="update-list">
@@ -240,7 +240,7 @@ redirect_from:
 
 <div class="version-card">
     <h2 class="version-title">版本：0.9.1</h2>
-    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
+    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
         <ul class="update-list">
@@ -254,7 +254,7 @@ redirect_from:
 
 <div class="version-card">
     <h2 class="version-title">版本：0.8.0</h2>
-    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
+    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
         <ul class="update-list">
@@ -267,7 +267,7 @@ redirect_from:
 
 <div class="version-card">
     <h2 class="version-title">版本：0.7.1</h2>
-    <p>点击<a href="https://wwwi.lanzouo.com/iHXVR2qqdnvc" class="download-btn">链接</a>下载，访问密码：ftqb （控制台最新版）</p>
+    <a href="https://wwwi.lanzouo.com/iHXVR2qqdnvc" class="download-btn">下载>xa>密码：ftqb （控制台最新版）</p>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
         <ul class="update-list">
