@@ -15,6 +15,8 @@ redirect_from:
 .download-section h1 {
     margin-top: 30px;
     margin-bottom: 30px;
+    font-size: 2em;
+    color: #333;
 }
 
 .download-container {
@@ -73,15 +75,16 @@ redirect_from:
     left: 100%;
 }
 
-.version-card h2 {
+.version-card .version-title {
     margin-top: 0;
     margin-bottom: 20px;
     color: #333;
     font-size: 1.5em;
+    font-weight: bold;
     transition: color 0.3s ease;
 }
 
-.version-card:hover h2 {
+.version-card:hover .version-title {
     color: #007bff;
 }
 
@@ -111,18 +114,26 @@ redirect_from:
     color: white !important;
 }
 
-.version-card ul {
+.version-card .update-summary {
     margin: 20px auto;
     padding-left: 20px;
     transition: transform 0.3s ease;
     flex-grow: 1;
     max-width: 100%;
     text-align: left;
-    list-style-type: disc; /* 确保使用圆点而不是数字 */
+    list-style-type: disc;
+}
+
+.version-card .update-summary h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
 .version-card li {
-    margin: 10px 0;
+    margin: 8px 0;
     transition: color 0.3s ease;
     word-break: break-word;
 }
@@ -183,61 +194,61 @@ redirect_from:
 </div>
 
 <div class="download-section">
-# 下载
+<h1>下载</h1>
 
 <div class="download-container">
 
 <div class="version-card">
-
-## 版本：0.10.0
-
-<a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">点击下载</a>
-
-### 版本更新摘要：
-- 全面统一设计语言
-- 增强文字清晰度
-- 添加了由李倬贤提供的游戏
-
+    <h2 class="version-title">版本：0.10.0</h2>
+    <a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">点击下载</a>
+    <div class="update-summary">
+        <h3>版本更新摘要：</h3>
+        <ul>
+            <li>全面统一设计语言</li>
+            <li>增强文字清晰度</li>
+            <li>添加了由李倬贤提供的游戏</li>
+        </ul>
+    </div>
 </div>
 
 <div class="version-card">
-
-## 版本：0.9.1
-
-<a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
-
-### 版本更新摘要：
-- 将功能完善
-- 优化代码
-- 页面更加流畅
-- 支持触控屏以及鼠标直接点击
-
+    <h2 class="version-title">版本：0.9.1</h2>
+    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
+    <div class="update-summary">
+        <h3>版本更新摘要：</h3>
+        <ul>
+            <li>将功能完善</li>
+            <li>优化代码</li>
+            <li>页面更加流畅</li>
+            <li>支持触控屏以及鼠标直接点击</li>
+        </ul>
+    </div>
 </div>
 
 <div class="version-card">
-
-## 版本：0.8.0
-
-<a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
-
-### 版本更新摘要：
-- 使用图形化界面
-- 增强用户使用体验
-- 重置设计语言
-
+    <h2 class="version-title">版本：0.8.0</h2>
+    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
+    <div class="update-summary">
+        <h3>版本更新摘要：</h3>
+        <ul>
+            <li>使用图形化界面</li>
+            <li>增强用户使用体验</li>
+            <li>重置设计语言</li>
+        </ul>
+    </div>
 </div>
 
 <div class="version-card">
-
-## 版本：0.7.1
-
-点击<a href="https://wwwi.lanzouo.com/iHXVR2qqdnvc" class="download-btn">链接</a>下载，访问密码：ftqb （控制台最新版）
-
-### 版本更新摘要：
-- 优化文字界面
-- 优化使用体验
-- 增加文字助手
-
+    <h2 class="version-title">版本：0.7.1</h2>
+    <p>点击<a href="https://wwwi.lanzouo.com/iHXVR2qqdnvc" class="download-btn">链接</a>下载，访问密码：ftqb （控制台最新版）</p>
+    <div class="update-summary">
+        <h3>版本更新摘要：</h3>
+        <ul>
+            <li>优化文字界面</li>
+            <li>优化使用体验</li>
+            <li>增加文字助手</li>
+        </ul>
+    </div>
 </div>
 
 </div>
