@@ -203,6 +203,9 @@ redirect_from:
 
 .preview-btn:hover {
     background-color: #e0a800; /* 预览版按钮悬停色 */
+    transform: scale(1.15) translateY(-3px); /* 修复：添加放大效果 */
+    /* 继承 .download-btn:hover 的其他效果，如box-shadow */
+    box-shadow: 0 10px 25px rgba(255, 193, 7, 0.6); /* 为黄色按钮定制阴影 */
 }
 
 .update-summary {
