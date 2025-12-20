@@ -27,6 +27,58 @@ redirect_from:
     max-width: 100%;
 }
 
+/* 特殊的预览版卡片样式 */
+.preview-card {
+    background-color: #fff3cd; /* 浅黄色背景表示预览版 */
+    border-radius: 25px;
+    padding: 30px;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 400px;
+    /* 占据两倍宽度 */
+    grid-column: span 2;
+    /* 在大屏幕上保持两倍宽度，在小屏幕上回退到单列 */
+}
+
+.preview-card:hover {
+    background-color: #ffeaa7; /* 悬停时的颜色 */
+    transform: translateY(-12px) scale(1.05); /* 稍微缩小缩放比例以适应更宽的卡片 */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+.preview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transition: left 1s;
+}
+
+.preview-card:hover::before {
+    left: 100%;
+}
+
 .version-card {
     background-color: #f8f9fa;
     border-radius: 25px;
@@ -42,16 +94,10 @@ redirect_from:
     height: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* 主轴居中 */
-    align-items: center;     /* 交叉轴居中 */
+    justify-content: center;
+    align-items: center;
     text-align: center;
     min-height: 400px;
-}
-
-/* 针对内容较多的卡片，确保内部元素也能居中 */
-.version-card > * {
-    align-self: center;
-    max-width: 100%;
 }
 
 .version-card:hover {
@@ -93,8 +139,16 @@ redirect_from:
     text-align: center;
 }
 
+.preview-card .version-title {
+    color: #856404; /* 预览版标题颜色 */
+}
+
 .version-card:hover .version-title {
     color: #007bff;
+}
+
+.preview-card:hover .version-title {
+    color: #6f4d04; /* 预览版悬停标题颜色 */
 }
 
 .download-btn {
@@ -117,11 +171,16 @@ redirect_from:
     align-self: center;
 }
 
-.download-btn:hover {
-    background-color: #0056b3;
-    transform: scale(1.15) translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,123,255,0.6);
-    color: white !important;
+/* 预览版的特殊按钮样式，更长一些 */
+.preview-btn {
+    min-width: 200px; /* 增加最小宽度 */
+    padding: 16px 35px; /* 增加内边距使其更长 */
+    background-color: #ffc107; /* 使用预览版的颜色 */
+    font-size: 1.1em;
+}
+
+.preview-btn:hover {
+    background-color: #e0a800; /* 预览版按钮悬停色 */
 }
 
 .update-summary {
@@ -144,8 +203,12 @@ redirect_from:
     color: #495057;
     font-size: 1.2em;
     font-weight: 600;
-    text-align: center; /* 让"版本更新摘要："也居中 */
+    text-align: center;
     width: 100%;
+}
+
+.preview-card .update-summary h3 {
+    color: #856404; /* 预览版摘要标题颜色 */
 }
 
 .update-list {
@@ -175,8 +238,14 @@ redirect_from:
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 35px;
     }
-    .version-card {
+    .preview-card, .version-card {
         height: 380px;
+    }
+    /* 在中等屏幕上，预览卡可能太宽，强制为单列 */
+    @media (max-width: 1200px) {
+        .preview-card {
+            grid-column: span 1; /* 回退到单列宽度 */
+        }
     }
 }
 
@@ -198,6 +267,10 @@ redirect_from:
     .version-card {
         height: 360px;
     }
+    /* 在小屏幕上，预览卡也强制为单列 */
+    .preview-card {
+        grid-column: span 1;
+    }
 }
 
 @media (max-width: 768px) {
@@ -205,12 +278,12 @@ redirect_from:
         grid-template-columns: 1fr;
         gap: 25px;
     }
-    .version-card {
+    .preview-card, .version-card {
         height: auto;
         min-height: 320px;
         padding: 25px;
     }
-    .version-card:hover {
+    .preview-card:hover, .version-card:hover {
         transform: translateY(-5px) scale(1.05);
     }
 }
@@ -225,9 +298,23 @@ redirect_from:
 
 <div class="download-container">
 
+<!-- 新增的预览版卡片 -->
+<div class="preview-card">
+    <h2 class="version-title">预览版：Beta 0.10.1</h2>
+    <a href="https://wwbiu.lanzouv.com/iZvJY35jq7of" class="download-btn preview-btn">点击下载预览版</a>
+    <div class="update-summary">
+        <h3>版本更新摘要：</h3>
+        <ul class="update-list">
+            <li>完善了个性化主题</li>
+            <li>添加了按键音效</li>
+        </ul>
+    </div>
+</div>
+
+<!-- 原有的其他版本卡片 -->
 <div class="version-card">
     <h2 class="version-title">版本：0.10.0</h2>
-    <a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">下载</a>
+    <a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">点击下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
         <ul class="update-list">
@@ -240,7 +327,7 @@ redirect_from:
 
 <div class="version-card">
     <h2 class="version-title">版本：0.9.1</h2>
-    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">下载</a>
+    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
         <ul class="update-list">
@@ -254,7 +341,7 @@ redirect_from:
 
 <div class="version-card">
     <h2 class="version-title">版本：0.8.0</h2>
-    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">下载</a>
+    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
         <ul class="update-list">
@@ -267,7 +354,7 @@ redirect_from:
 
 <div class="version-card">
     <h2 class="version-title">版本：0.7.1</h2>
-    <a href="https://wwwi.lanzouo.com/iHXVR2qqdnvc" class="download-btn">下载>xa>密码：ftqb （控制台最新版）</p>
+    <p>点击<a href="https://wwwi.lanzouo.com/iHXVR2qqdnvc" class="download-btn">链接</a>下载，访问密码：ftqb （控制台最新版）</p>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
         <ul class="update-list">
