@@ -42,10 +42,16 @@ redirect_from:
     height: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* 主轴居中 */
+    align-items: center;     /* 交叉轴居中 */
     text-align: center;
     min-height: 400px;
+}
+
+/* 针对内容较多的卡片，确保内部元素也能居中 */
+.version-card > * {
+    align-self: center;
+    max-width: 100%;
 }
 
 .version-card:hover {
@@ -75,13 +81,16 @@ redirect_from:
     left: 100%;
 }
 
-.version-card .version-title {
+.version-title {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #333;
     font-size: 1.5em;
     font-weight: bold;
     transition: color 0.3s ease;
+    align-self: center;
+    width: 100%;
+    text-align: center;
 }
 
 .version-card:hover .version-title {
@@ -105,6 +114,7 @@ redirect_from:
     cursor: pointer;
     font-size: 1em;
     text-decoration: none;
+    align-self: center;
 }
 
 .download-btn:hover {
@@ -114,31 +124,48 @@ redirect_from:
     color: white !important;
 }
 
-.version-card .update-summary {
-    margin: 20px auto;
-    padding-left: 20px;
+.update-summary {
+    margin: 15px auto;
+    padding-left: 15px;
     transition: transform 0.3s ease;
     flex-grow: 1;
     max-width: 100%;
     text-align: left;
-    list-style-type: disc;
+    align-self: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.version-card .update-summary h3 {
+.update-summary h3 {
     margin-top: 0;
     margin-bottom: 10px;
     color: #495057;
     font-size: 1.2em;
     font-weight: 600;
+    text-align: center; /* 让"版本更新摘要："也居中 */
+    width: 100%;
 }
 
-.version-card li {
-    margin: 8px 0;
+.update-list {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: disc;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.update-list li {
+    margin: 6px 0;
     transition: color 0.3s ease;
     word-break: break-word;
 }
 
-.version-card:hover li {
+.version-card:hover .update-list li {
     color: #495057;
 }
 
@@ -203,7 +230,7 @@ redirect_from:
     <a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">点击下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
-        <ul>
+        <ul class="update-list">
             <li>全面统一设计语言</li>
             <li>增强文字清晰度</li>
             <li>添加了由李倬贤提供的游戏</li>
@@ -216,7 +243,7 @@ redirect_from:
     <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
-        <ul>
+        <ul class="update-list">
             <li>将功能完善</li>
             <li>优化代码</li>
             <li>页面更加流畅</li>
@@ -230,7 +257,7 @@ redirect_from:
     <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
-        <ul>
+        <ul class="update-list">
             <li>使用图形化界面</li>
             <li>增强用户使用体验</li>
             <li>重置设计语言</li>
@@ -243,7 +270,7 @@ redirect_from:
     <p>点击<a href="https://wwwi.lanzouo.com/iHXVR2qqdnvc" class="download-btn">链接</a>下载，访问密码：ftqb （控制台最新版）</p>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
-        <ul>
+        <ul class="update-list">
             <li>优化文字界面</li>
             <li>优化使用体验</li>
             <li>增加文字助手</li>
