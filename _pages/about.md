@@ -203,9 +203,16 @@ redirect_from:
 
 .preview-btn:hover {
     background-color: #e0a800; /* 预览版按钮悬停色 */
-    transform: scale(1.15) translateY(-3px); /* 修复：添加放大效果 */
-    /* 继承 .download-btn:hover 的其他效果，如box-shadow */
+    transform: scale(1.15) translateY(-3px); /* 保持预览版的放大效果 */
     box-shadow: 0 10px 25px rgba(255, 193, 7, 0.6); /* 为黄色按钮定制阴影 */
+}
+
+/* 修复：为普通卡片内的按钮定义更明确的悬停效果 */
+.version-card .download-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.2) translateY(-3px); /* 稍微加大放大比例，使其更明显 */
+    box-shadow: 0 10px 25px rgba(0,123,255, 0.6);
+    color: white !important;
 }
 
 .update-summary {
