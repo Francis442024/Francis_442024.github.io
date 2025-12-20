@@ -8,20 +8,24 @@ redirect_from:
 ---
 
 <style>
+.app-description {
+    margin: 20px 0;
+}
+
+.download-section h1 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 .download-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 40px;
-    padding: 30px;
-    max-width: calc(4 * (min(320px + 80px, 100vw/4 + 80px)));
-    margin: 0 auto;
+    padding: 30px 0;
+    max-width: 100%;
 }
 
-.version-item {
-    margin: 0;
-}
-
-.version-box {
+.version-card {
     background-color: #f8f9fa;
     border-radius: 25px;
     padding: 30px;
@@ -42,14 +46,14 @@ redirect_from:
     min-height: 400px;
 }
 
-.version-box:hover {
+.version-card:hover {
     background-color: #e3f2fd;
     transform: translateY(-12px) scale(1.1);
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     z-index: 10;
 }
 
-.version-box::before {
+.version-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -65,77 +69,77 @@ redirect_from:
     transition: left 1s;
 }
 
-.version-box:hover::before {
+.version-card:hover::before {
     left: 100%;
 }
 
-.version-box h2 {
+.version-card h2 {
     margin-top: 0;
     margin-bottom: 20px;
     color: #333;
     font-size: 1.5em;
     transition: color 0.3s ease;
-    flex-shrink: 0;
-    align-self: stretch;
 }
 
-.version-box:hover h2 {
+.version-card:hover h2 {
     color: #007bff;
 }
 
-.download-link {
+.download-btn {
     display: inline-block;
     background-color: #007bff;
-    color: white;
-    text-decoration: none;
+    color: white !important;
+    text-decoration: none !important;
     padding: 14px 28px;
     border-radius: 12px;
     transition: all 0.3s ease;
     margin: 15px auto;
     font-weight: bold;
     box-shadow: 0 3px 8px rgba(0,123,255,0.4);
-    flex-shrink: 0;
     min-width: 140px;
     text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
 }
 
-.download-link:hover {
+.download-btn:hover {
     background-color: #0056b3;
     transform: scale(1.15) translateY(-3px);
     box-shadow: 0 10px 25px rgba(0,123,255,0.6);
-    color: white;
+    color: white !important;
 }
 
-.version-box ul {
+.version-card ul {
     margin: 20px auto;
     padding-left: 20px;
     transition: transform 0.3s ease;
     flex-grow: 1;
     max-width: 100%;
-    align-self: stretch;
-}
-
-.version-box:hover ul {
-    transform: translateX(0);
-}
-
-.version-box li {
-    margin: 10px 0;
-    transition: color 0.3s ease;
-    word-break: break-word;
     text-align: left;
 }
 
-.version-box:hover li {
+.version-card:hover ul {
+    transform: translateX(0);
+}
+
+.version-card li {
+    margin: 10px 0;
+    transition: color 0.3s ease;
+    word-break: break-word;
+}
+
+.version-card:hover li {
     color: #495057;
 }
 
+/* 响应式调整 */
 @media (max-width: 1400px) {
     .download-container {
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 35px;
     }
-    .version-box {
+    .version-card {
         height: 380px;
     }
 }
@@ -145,7 +149,7 @@ redirect_from:
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 30px;
     }
-    .version-box {
+    .version-card {
         height: 360px;
     }
 }
@@ -155,7 +159,7 @@ redirect_from:
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
     }
-    .version-box {
+    .version-card {
         height: 360px;
     }
 }
@@ -164,30 +168,31 @@ redirect_from:
     .download-container {
         grid-template-columns: 1fr;
         gap: 25px;
-        padding: 20px;
     }
-    .version-box {
+    .version-card {
         height: auto;
         min-height: 320px;
         padding: 25px;
     }
-    .version-box:hover {
+    .version-card:hover {
         transform: translateY(-5px) scale(1.05);
     }
 }
 </style>
 
+<div class="app-description">
 是一款最新颖的学习软件，拥有极简风格无需担心自己分心，最新版本为Beta 0.10.0测试版，完成了大部分功能，正在持续更新中……
+</div>
 
+<div class="download-section">
 # 下载
 
 <div class="download-container">
 
-<div class="version-item">
-<div class="version-box">
+<div class="version-card">
 
 ## 版本：0.10.0
-[点击下载](https://wwwi.lanzouo.com/izi8c33snbhg)
+[<span class="download-btn">点击下载</span>](https://wwwi.lanzouo.com/izi8c33snbhg)
 
 ### 版本更新摘要：
 1. 全面统一设计语言
@@ -195,13 +200,11 @@ redirect_from:
 3. 添加了由李倬贤提供的游戏
 
 </div>
-</div>
 
-<div class="version-item">
-<div class="version-box">
+<div class="version-card">
 
 ## 版本：0.9.1
-[点击下载](https://wwwi.lanzouo.com/iVm1H2xi3sid)
+[<span class="download-btn">点击下载</span>](https://wwwi.lanzouo.com/iVm1H2xi3sid)
 
 ### 版本更新摘要：
 1. 将功能完善
@@ -210,13 +213,11 @@ redirect_from:
 4. 支持触控屏以及鼠标直接点击
 
 </div>
-</div>
 
-<div class="version-item">
-<div class="version-box">
+<div class="version-card">
 
 ## 版本：0.8.0
-[点击下载](https://wwwi.lanzouo.com/iVm1H2xi3sid)
+[<span class="download-btn">点击下载</span>](https://wwwi.lanzouo.com/iVm1H2xi3sid)
 
 ### 版本更新摘要：
 1. 使用图形化界面
@@ -224,13 +225,11 @@ redirect_from:
 3. 重置设计语言
 
 </div>
-</div>
 
-<div class="version-item">
-<div class="version-box">
+<div class="version-card">
 
 ## 版本：0.7.1
-点击[链接](https://wwwi.lanzouo.com/iHXVR2qqdnvc)下载，访问密码：ftqb （控制台最新版）
+点击[<span class="download-btn">链接</span>](https://wwwi.lanzouo.com/iHXVR2qqdnvc)下载，访问密码：ftqb （控制台最新版）
 
 ### 版本更新摘要：
 1. 优化文字界面
@@ -238,6 +237,6 @@ redirect_from:
 3. 增加文字助手
 
 </div>
-</div>
 
+</div>
 </div>
