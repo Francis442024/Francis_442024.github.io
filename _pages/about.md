@@ -12,6 +12,29 @@ redirect_from:
     margin: 20px 0;
 }
 
+/* 新增：用于包裹视频的容器样式 */
+.video-container {
+    position: relative;
+    width: 100%;
+    /* 16:9 宽高比 (9 / 16 = 0.5625) */
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    margin: 30px auto; /* 上下边距，居中 */
+    border-radius: 15px; /* 与卡片圆角一致 */
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12); /* 与卡片阴影一致 */
+    max-width: 800px; /* 设置最大宽度 */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; /* 移除 iframe 默认边框 */
+}
+
 .download-section h1 {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -27,7 +50,6 @@ redirect_from:
     max-width: 100%;
 }
 
-/* 特殊的预览版卡片样式 */
 .preview-card {
     background-color: #fff3cd; /* 浅黄色背景表示预览版 */
     border-radius: 25px;
@@ -291,6 +313,17 @@ redirect_from:
 
 <div class="app-description">
 是一款最新颖的学习软件，拥有极简风格无需担心自己分心，最新版本为Beta 0.10.0测试版，完成了大部分功能，正在持续更新中……
+</div>
+
+<!-- 在应用描述之后，下载部分之前插入视频 -->
+<div class="video-container">
+    <iframe src="//player.bilibili.com/player.html?bvid=BV1QeZBYjE4W&autoplay=0" 
+            scrolling="no" 
+            border="0" 
+            frameborder="no" 
+            framespacing="0" 
+            allowfullscreen="true">
+    </iframe>
 </div>
 
 <div class="download-section">
