@@ -23,11 +23,11 @@ repository               : "francis442024.github.io/Francis_442024.github.io/"
 author:
   # Biographic information
   avatar           : "https://s21.ax1x.com/2025/03/16/pEaqntf.jpg"
-  name             : "FrancisQiao"
+  name             : "弗朗斯乔"
   pronouns         : # example: "she/her"  
-  bio              : "又高又帅、聪明可嘉、明眸皓齿、学富五车、才高八斗、冰雪聪明、天生丽质、绝代佳人、出类拔萃、文武双全、风度翩翩、秀外慧中、玉树临风、见多识广、相貌堂堂、人间尤物、白璧无瑕、先人后己、独当一面、厚德载物、文韬武略,次次考 试考102，考试常常考满分。"
-  location         : "中国"
-  employer         : "花苑小学"
+  bio              : "玩原神。我的世界。会Arduino和C++，很帅，很屌，英语很好"
+  location         : "中国 广东"
+  employer         : "培立实验学校"
   uri              : # URL
   email            : "Francis_442024@163.com" 
 
@@ -41,11 +41,11 @@ author:
   researchgate     : # URL
   scopus           : # URL
 
-  # Repositories and software development
+  # 存储库与软件开发
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "Francis_442024"
+  github           : "Francis442024"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
@@ -67,7 +67,7 @@ author:
   steam            : # Username
   telegram         : # URL
   tumblr           : # Username
-  twitter          : # Username for X / Twitter
+  twitter          : Francis Zhong@FrancisQiao_
   vine             : # Username
   weibo            : # Username
   wikipedia        : # Username
