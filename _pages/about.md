@@ -50,6 +50,57 @@ redirect_from:
     max-width: 100%;
 }
 
+/* 最新版本卡片 - 双倍宽度 */
+.latest-version-card {
+    background-color: #d4edda; /* 浅绿色背景表示最新版 */
+    border-radius: 25px;
+    padding: 30px;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 400px;
+    grid-column: span 2; /* 双倍宽度 */
+}
+
+.latest-version-card:hover {
+    background-color: #c3e6cb; /* 悬停时的颜色 */
+    transform: translateY(-12px) scale(1.05); /* 稍微缩小缩放比例以适应更宽的卡片 */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+.latest-version-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transition: left 1s;
+}
+
+.latest-version-card:hover::before {
+    left: 100%;
+}
+
+/* 普通版本卡片 */
 .version-card {
     background-color: #f8f9fa;
     border-radius: 25px;
@@ -98,6 +149,25 @@ redirect_from:
     left: 100%;
 }
 
+/* 折叠版本容器 */
+.collapsible-versions {
+    grid-column: span 2; /* 占据两列宽度 */
+    display: none; /* 默认隐藏 */
+}
+
+.collapsible-versions.show {
+    display: grid; /* 显示时使用grid布局 */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 与主容器相同 */
+    gap: 40px;
+    animation: fadeIn 0.5s ease-in-out; /* 添加淡入动画 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 版本标题 */
 .version-title {
     margin-top: 0;
     margin-bottom: 15px;
@@ -110,10 +180,19 @@ redirect_from:
     text-align: center;
 }
 
+.latest-version-card .version-title {
+    color: #155724; /* 最新版标题颜色 */
+}
+
 .version-card:hover .version-title {
     color: #007bff;
 }
 
+.latest-version-card:hover .version-title {
+    color: #0b2e13; /* 最新版悬停标题颜色 */
+}
+
+/* 下载按钮 */
 .download-btn {
     display: inline-block;
     background-color: #007bff;
@@ -134,8 +213,36 @@ redirect_from:
     align-self: center;
 }
 
-/* 修复：为普通卡片内的按钮定义更明确的悬停效果 */
-.version-card .download-btn:hover {
+/* 展开/收起按钮样式 */
+.toggle-btn {
+    display: block;
+    background-color: #28a745; /* 绿色按钮 */
+    color: white !important;
+    text-decoration: none !important;
+    padding: 14px 28px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    margin: 15px auto;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(40, 167, 69, 0.4);
+    min-width: 140px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+    align-self: center;
+}
+
+.toggle-btn:hover {
+    background-color: #218838; /* 悬停颜色 */
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.5);
+}
+
+/* 修复：为卡片内的按钮定义更明确的悬停效果 */
+.version-card .download-btn:hover,
+.latest-version-card .download-btn:hover {
     background-color: #0056b3;
     transform: scale(1.2) translateY(-3px); /* 稍微加大放大比例，使其更明显 */
     box-shadow: 0 10px 25px rgba(0,123,255, 0.6);
@@ -166,6 +273,10 @@ redirect_from:
     width: 100%;
 }
 
+.latest-version-card .update-summary h3 {
+    color: #155724; /* 最新版摘要标题颜色 */
+}
+
 .update-list {
     margin: 0;
     padding-left: 20px;
@@ -183,7 +294,8 @@ redirect_from:
     word-break: break-word;
 }
 
-.version-card:hover .update-list li {
+.version-card:hover .update-list li,
+.latest-version-card:hover .update-list li {
     color: #495057;
 }
 
@@ -193,8 +305,14 @@ redirect_from:
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 35px;
     }
-    .version-card {
+    .latest-version-card, .version-card {
         height: 380px;
+    }
+    /* 在中等屏幕上，最新版卡可能太宽，强制为单列 */
+    @media (max-width: 1200px) {
+        .latest-version-card {
+            grid-column: span 1; /* 回退到单列宽度 */
+        }
     }
 }
 
@@ -216,6 +334,13 @@ redirect_from:
     .version-card {
         height: 360px;
     }
+    /* 在小屏幕上，最新版卡也强制为单列 */
+    .latest-version-card {
+        grid-column: span 1;
+    }
+    .collapsible-versions {
+        grid-column: span 1; /* 展开后也占用单列 */
+    }
 }
 
 @media (max-width: 768px) {
@@ -223,19 +348,19 @@ redirect_from:
         grid-template-columns: 1fr;
         gap: 25px;
     }
-    .version-card {
+    .latest-version-card, .version-card {
         height: auto;
         min-height: 320px;
         padding: 25px;
     }
-    .version-card:hover {
+    .latest-version-card:hover, .version-card:hover {
         transform: translateY(-5px) scale(1.05);
     }
 }
 </style>
 
 <div class="app-description">
-Student-Nightmare学习系统是一款专注数学计算训练的创新编程作品，主打离线流畅、无广告、个性化学习体验。
+是一款最新颖的学习软件，拥有极简风格无需担心自己分心，最新版本为Beta 0.10.0测试版，完成了大部分功能，正在持续更新中……
 </div>
 
 <!-- 在应用描述之后，下载部分之前插入视频 -->
@@ -254,23 +379,9 @@ Student-Nightmare学习系统是一款专注数学计算训练的创新编程作
 
 <div class="download-container">
 
-<!-- 新增的 Beta 0.10.1 版本卡片 -->
-<div class="version-card">
-    <h2 class="version-title">版本：Beta 0.10.1</h2>
-    <a href="https://wwbiu.lanzouv.com/i16yk3ge93zg" class="download-btn">点击下载</a>
-    <div class="update-summary">
-        <h3>版本更新摘要：</h3>
-        <ul class="update-list">
-            <li>增加了按键音效</li>
-            <li>制作了主题切换</li>
-            <li>暂时移除了游戏</li>
-        </ul>
-    </div>
-</div>
-
-<!-- 新增的 Beta 0.11.0 版本卡片 -->
-<div class="version-card">
-    <h2 class="version-title">版本：Beta 0.11.0</h2>
+<!-- 最新版本卡片 (Beta 0.11.0) - 双倍宽度 -->
+<div class="version-card latest-version-card">
+    <h2 class="version-title">最新版：Beta 0.11.0</h2>
     <a href="https://wwbiu.lanzouv.com/i66Vw3ge922h" class="download-btn">点击下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
@@ -282,59 +393,101 @@ Student-Nightmare学习系统是一款专注数学计算训练的创新编程作
     </div>
 </div>
 
-<!-- 原有的其他版本卡片 (保持不变) -->
-<div class="version-card">
-    <h2 class="version-title">版本：0.10.0</h2>
-    <a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">点击下载</a>
-    <div class="update-summary">
-        <h3>版本更新摘要：</h3>
-        <ul class="update-list">
-            <li>全面统一设计语言</li>
-            <li>增强文字清晰度</li>
-            <li>添加了由李倬贤提供的游戏</li>
-        </ul>
+<!-- 折叠的其他版本 -->
+<div id="otherVersions" class="collapsible-versions">
+    <!-- Beta 0.10.1 -->
+    <div class="version-card">
+        <h2 class="version-title">版本：Beta 0.10.1</h2>
+        <a href="https://wwbiu.lanzouv.com/i16yk3ge93zg" class="download-btn">点击下载</a>
+        <div class="update-summary">
+            <h3>版本更新摘要：</h3>
+            <ul class="update-list">
+                <li>增加了按键音效</li>
+                <li>制作了主题切换</li>
+                <li>暂时移除了游戏</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 原有的其他版本卡片 (保持不变) -->
+    <div class="version-card">
+        <h2 class="version-title">版本：0.10.0</h2>
+        <a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">点击下载</a>
+        <div class="update-summary">
+            <h3>版本更新摘要：</h3>
+            <ul class="update-list">
+                <li>全面统一设计语言</li>
+                <li>增强文字清晰度</li>
+                <li>添加了由李倬贤提供的游戏</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="version-card">
+        <h2 class="version-title">版本：0.9.1</h2>
+        <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
+        <div class="update-summary">
+            <h3>版本更新摘要：</h3>
+            <ul class="update-list">
+                <li>将功能完善</li>
+                <li>优化代码</li>
+                <li>页面更加流畅</li>
+                <li>支持触控屏以及鼠标直接点击</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="version-card">
+        <h2 class="version-title">版本：0.8.0</h2>
+        <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
+        <div class="update-summary">
+            <h3>版本更新摘要：</h3>
+            <ul class="update-list">
+                <li>使用图形化界面</li>
+                <li>增强用户使用体验</li>
+                <li>重置设计语言</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="version-card">
+        <h2 class="version-title">版本：0.7.1</h2>
+        <p>点击<a href="https://wwwi.lanzouo.com/iHXVR2qqdnvc" class="download-btn">链接</a>下载，访问密码：ftqb （控制台最新版）</p>
+        <div class="update-summary">
+            <h3>版本更新摘要：</h3>
+            <ul class="update-list">
+                <li>优化文字界面</li>
+                <li>优化使用体验</li>
+                <li>增加文字助手</li>
+            </ul>
+        </div>
     </div>
 </div>
 
-<div class="version-card">
-    <h2 class="version-title">版本：0.9.1</h2>
-    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
-    <div class="update-summary">
-        <h3>版本更新摘要：</h3>
-        <ul class="update-list">
-            <li>将功能完善</li>
-            <li>优化代码</li>
-            <li>页面更加流畅</li>
-            <li>支持触控屏以及鼠标直接点击</li>
-        </ul>
-    </div>
-</div>
-
-<div class="version-card">
-    <h2 class="version-title">版本：0.8.0</h2>
-    <a href="https://wwwi.lanzouo.com/iVm1H2xi3sid" class="download-btn">点击下载</a>
-    <div class="update-summary">
-        <h3>版本更新摘要：</h3>
-        <ul class="update-list">
-            <li>使用图形化界面</li>
-            <li>增强用户使用体验</li>
-            <li>重置设计语言</li>
-        </ul>
-    </div>
-</div>
-
-<div class="version-card">
-    <h2 class="version-title">版本：0.7.1</h2>
-    <p>点击<a href="https://wwwi.lanzouo.com/iHXVR2qqdnvc" class="download-btn">链接</a>下载，访问密码：ftqb （控制台最新版）</p>
-    <div class="update-summary">
-        <h3>版本更新摘要：</h3>
-        <ul class="update-list">
-            <li>优化文字界面</li>
-            <li>优化使用体验</li>
-            <li>增加文字助手</li>
-        </ul>
-    </div>
-</div>
+<!-- 展开/收起按钮 -->
+<button id="toggleButton" class="toggle-btn">展开其他版本</button>
 
 </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggleButton');
+    const otherVersionsContainer = document.getElementById('otherVersions');
+    let isExpanded = false;
+
+    toggleButton.addEventListener('click', function() {
+        if (isExpanded) {
+            // 收起
+            otherVersionsContainer.classList.remove('show');
+            toggleButton.textContent = '展开其他版本';
+            isExpanded = false;
+        } else {
+            // 展开
+            otherVersionsContainer.classList.add('show');
+            toggleButton.textContent = '收起其他版本';
+            isExpanded = true;
+        }
+    });
+});
+</script>
