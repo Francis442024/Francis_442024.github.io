@@ -50,57 +50,6 @@ redirect_from:
     max-width: 100%;
 }
 
-.preview-card {
-    background-color: #fff3cd; /* 浅黄色背景表示预览版 */
-    border-radius: 25px;
-    padding: 30px;
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 400px;
-    /* 占据两倍宽度 */
-    grid-column: span 2;
-    /* 在大屏幕上保持两倍宽度，在小屏幕上回退到单列 */
-}
-
-.preview-card:hover {
-    background-color: #ffeaa7; /* 悬停时的颜色 */
-    transform: translateY(-12px) scale(1.05); /* 稍微缩小缩放比例以适应更宽的卡片 */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    z-index: 10;
-}
-
-.preview-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.4),
-        transparent
-    );
-    transition: left 1s;
-}
-
-.preview-card:hover::before {
-    left: 100%;
-}
-
 .version-card {
     background-color: #f8f9fa;
     border-radius: 25px;
@@ -161,16 +110,8 @@ redirect_from:
     text-align: center;
 }
 
-.preview-card .version-title {
-    color: #856404; /* 预览版标题颜色 */
-}
-
 .version-card:hover .version-title {
     color: #007bff;
-}
-
-.preview-card:hover .version-title {
-    color: #6f4d04; /* 预览版悬停标题颜色 */
 }
 
 .download-btn {
@@ -191,20 +132,6 @@ redirect_from:
     font-size: 1em;
     text-decoration: none;
     align-self: center;
-}
-
-/* 预览版的特殊按钮样式，更长一些 */
-.preview-btn {
-    min-width: 200px; /* 增加最小宽度 */
-    padding: 16px 35px; /* 增加内边距使其更长 */
-    background-color: #ffc107; /* 使用预览版的颜色 */
-    font-size: 1.1em;
-}
-
-.preview-btn:hover {
-    background-color: #e0a800; /* 预览版按钮悬停色 */
-    transform: scale(1.15) translateY(-3px); /* 保持预览版的放大效果 */
-    box-shadow: 0 10px 25px rgba(255, 193, 7, 0.6); /* 为黄色按钮定制阴影 */
 }
 
 /* 修复：为普通卡片内的按钮定义更明确的悬停效果 */
@@ -239,10 +166,6 @@ redirect_from:
     width: 100%;
 }
 
-.preview-card .update-summary h3 {
-    color: #856404; /* 预览版摘要标题颜色 */
-}
-
 .update-list {
     margin: 0;
     padding-left: 20px;
@@ -270,14 +193,8 @@ redirect_from:
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 35px;
     }
-    .preview-card, .version-card {
+    .version-card {
         height: 380px;
-    }
-    /* 在中等屏幕上，预览卡可能太宽，强制为单列 */
-    @media (max-width: 1200px) {
-        .preview-card {
-            grid-column: span 1; /* 回退到单列宽度 */
-        }
     }
 }
 
@@ -299,10 +216,6 @@ redirect_from:
     .version-card {
         height: 360px;
     }
-    /* 在小屏幕上，预览卡也强制为单列 */
-    .preview-card {
-        grid-column: span 1;
-    }
 }
 
 @media (max-width: 768px) {
@@ -310,19 +223,19 @@ redirect_from:
         grid-template-columns: 1fr;
         gap: 25px;
     }
-    .preview-card, .version-card {
+    .version-card {
         height: auto;
         min-height: 320px;
         padding: 25px;
     }
-    .preview-card:hover, .version-card:hover {
+    .version-card:hover {
         transform: translateY(-5px) scale(1.05);
     }
 }
 </style>
 
 <div class="app-description">
-是一款最新颖的学习软件，拥有极简风格无需担心自己分心，最新版本为Beta 0.10.1预览版，完成了大部分功能，正在持续更新中……
+Student-Nightmare学习系统是一款专注数学计算训练的创新编程作品，主打离线流畅、无广告、个性化学习体验。
 </div>
 
 <!-- 在应用描述之后，下载部分之前插入视频 -->
@@ -341,20 +254,35 @@ redirect_from:
 
 <div class="download-container">
 
-<!-- 新增的预览版卡片 -->
-<div class="preview-card">
-    <h2 class="version-title">预览版：Beta 0.10.1</h2>
-    <a href="https://wwbiu.lanzouv.com/iZvJY35jq7of" class="download-btn preview-btn">点击下载预览版</a>
+<!-- 新增的 Beta 0.10.1 版本卡片 -->
+<div class="version-card">
+    <h2 class="version-title">版本：Beta 0.10.1</h2>
+    <a href="https://wwbiu.lanzouv.com/i16yk3ge93zg" class="download-btn">点击下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
         <ul class="update-list">
-            <li>完善了个性化主题</li>
-            <li>添加了按键音效</li>
+            <li>增加了按键音效</li>
+            <li>制作了主题切换</li>
+            <li>暂时移除了游戏</li>
         </ul>
     </div>
 </div>
 
-<!-- 原有的其他版本卡片 -->
+<!-- 新增的 Beta 0.11.0 版本卡片 -->
+<div class="version-card">
+    <h2 class="version-title">版本：Beta 0.11.0</h2>
+    <a href="https://wwbiu.lanzouv.com/i66Vw3ge922h" class="download-btn">点击下载</a>
+    <div class="update-summary">
+        <h3>版本更新摘要：</h3>
+        <ul class="update-list">
+            <li>重制了游戏</li>
+            <li>添加了动画</li>
+            <li>加强了主题页面</li>
+        </ul>
+    </div>
+</div>
+
+<!-- 原有的其他版本卡片 (保持不变) -->
 <div class="version-card">
     <h2 class="version-title">版本：0.10.0</h2>
     <a href="https://wwwi.lanzouo.com/izi8c33snbhg" class="download-btn">点击下载</a>
