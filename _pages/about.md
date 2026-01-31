@@ -50,6 +50,58 @@ redirect_from:
     max-width: 100%;
 }
 
+/* 最新版本卡片 - 双倍宽度 + 突出颜色 */
+.latest-version-card {
+    background-color: #d1ecf1; /* 浅蓝色背景表示最新版 */
+    border: 2px solid #bee5eb; /* 添加边框使其更突出 */
+    border-radius: 25px;
+    padding: 30px;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 400px;
+    grid-column: span 2; /* 双倍宽度 */
+}
+
+.latest-version-card:hover {
+    background-color: #ade3e9; /* 悬停时的颜色 */
+    transform: translateY(-12px) scale(1.05); /* 稍微缩小缩放比例以适应更宽的卡片 */
+    box-shadow: 0 20px 50px rgba(0,0,0, 0.2); /* 调整阴影透明度 */
+    z-index: 10;
+}
+
+.latest-version-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transition: left 1s;
+}
+
+.latest-version-card:hover::before {
+    left: 100%;
+}
+
+/* 普通版本卡片 */
 .version-card {
     background-color: #f8f9fa;
     border-radius: 25px;
@@ -69,13 +121,13 @@ redirect_from:
     align-items: center;
     text-align: center;
     min-height: 400px;
-    z-index: 1; /* 确保放大时在顶层 */
 }
 
 .version-card:hover {
     background-color: #e3f2fd;
     transform: translateY(-12px) scale(1.1);
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    z-index: 10;
 }
 
 .version-card::before {
@@ -98,25 +150,7 @@ redirect_from:
     left: 100%;
 }
 
-/* 放大状态的卡片样式 */
-.version-card.enlarged {
-    position: fixed;
-    top: 10vh; /* 距离顶部 10% 屏幕高度 */
-    left: 10vw; /* 距离左侧 10% 屏幕宽度 */
-    width: 80vw !important; /* 占据屏幕 80% 宽度 (五分之四) */
-    height: 80vh !important; /* 占据屏幕 80% 高度 (五分之四) */
-    max-width: none !important; /* 覆盖 grid 布局的宽度 */
-    max-height: none !important; /* 覆盖原始高度 */
-    z-index: 1000; /* 确保在最顶层 */
-    transform: scale(1) !important; /* 重置悬停时的缩放效果 */
-    /* 使用 !important 确保样式优先级 */
-}
-
-/* 防止背景滚动 */
-body.enlarged-active {
-    overflow: hidden;
-}
-
+/* 版本标题 */
 .version-title {
     margin-top: 0;
     margin-bottom: 15px;
@@ -129,10 +163,19 @@ body.enlarged-active {
     text-align: center;
 }
 
+.latest-version-card .version-title {
+    color: #0c5460; /* 最新版标题颜色 */
+}
+
 .version-card:hover .version-title {
     color: #007bff;
 }
 
+.latest-version-card:hover .version-title {
+    color: #062c33; /* 最新版悬停标题颜色 */
+}
+
+/* 下载按钮 */
 .download-btn {
     display: inline-block;
     background-color: #007bff;
@@ -151,12 +194,11 @@ body.enlarged-active {
     font-size: 1em;
     text-decoration: none;
     align-self: center;
-    /* 阻止点击事件冒泡到父卡片 */
-    pointer-events: auto;
 }
 
 /* 修复：为卡片内的按钮定义更明确的悬停效果 */
-.version-card .download-btn:hover {
+.version-card .download-btn:hover,
+.latest-version-card .download-btn:hover {
     background-color: #0056b3;
     transform: scale(1.2) translateY(-3px); /* 稍微加大放大比例，使其更明显 */
     box-shadow: 0 10px 25px rgba(0,123,255, 0.6);
@@ -187,6 +229,10 @@ body.enlarged-active {
     width: 100%;
 }
 
+.latest-version-card .update-summary h3 {
+    color: #0c5460; /* 最新版摘要标题颜色 */
+}
+
 .update-list {
     margin: 0;
     padding-left: 20px;
@@ -204,7 +250,8 @@ body.enlarged-active {
     word-break: break-word;
 }
 
-.version-card:hover .update-list li {
+.version-card:hover .update-list li,
+.latest-version-card:hover .update-list li {
     color: #495057;
 }
 
@@ -214,8 +261,14 @@ body.enlarged-active {
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 35px;
     }
-    .version-card {
+    .latest-version-card, .version-card {
         height: 380px;
+    }
+    /* 在中等屏幕上，最新版卡可能太宽，强制为单列 */
+    @media (max-width: 1200px) {
+        .latest-version-card {
+            grid-column: span 1; /* 回退到单列宽度 */
+        }
     }
 }
 
@@ -237,6 +290,10 @@ body.enlarged-active {
     .version-card {
         height: 360px;
     }
+    /* 在小屏幕上，最新版卡也强制为单列 */
+    .latest-version-card {
+        grid-column: span 1;
+    }
 }
 
 @media (max-width: 768px) {
@@ -244,12 +301,12 @@ body.enlarged-active {
         grid-template-columns: 1fr;
         gap: 25px;
     }
-    .version-card {
+    .latest-version-card, .version-card {
         height: auto;
         min-height: 320px;
         padding: 25px;
     }
-    .version-card:hover {
+    .latest-version-card:hover, .version-card:hover {
         transform: translateY(-5px) scale(1.05);
     }
 }
@@ -275,9 +332,9 @@ body.enlarged-active {
 
 <div class="download-container">
 
-<!-- 所有版本卡片，保持原始顺序 -->
-<div class="version-card">
-    <h2 class="version-title">版本：Beta 0.11.0</h2>
+<!-- 最新版本卡片 (Beta 0.11.0) - 双倍宽度 + 突出颜色 -->
+<div class="version-card latest-version-card">
+    <h2 class="version-title">最新版：Beta 0.11.0</h2>
     <a href="https://wwbiu.lanzouv.com/i66Vw3ge922h" class="download-btn">点击下载</a>
     <div class="update-summary">
         <h3>版本更新摘要：</h3>
@@ -289,6 +346,7 @@ body.enlarged-active {
     </div>
 </div>
 
+<!-- 其他版本卡片 (保持原始顺序和样式) -->
 <div class="version-card">
     <h2 class="version-title">版本：Beta 0.10.1</h2>
     <a href="https://wwbiu.lanzouv.com/i16yk3ge93zg" class="download-btn">点击下载</a>
@@ -357,79 +415,3 @@ body.enlarged-active {
 
 </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.version-card');
-
-    cards.forEach(card => {
-        let hoverTimer = null;
-        let isEnlarged = false;
-
-        // 鼠标进入卡片区域
-        card.addEventListener('mouseenter', function(e) {
-            // 如果卡片已经放大，不触发定时器
-            if (isEnlarged) return;
-            
-            // 设置3秒定时器
-            hoverTimer = setTimeout(() => {
-                if (!isEnlarged) { // 确保在此期间没有被点击放大
-                    enlargeCard(this);
-                    isEnlarged = true;
-                }
-            }, 3000); // 3000毫秒 = 3秒
-        });
-
-        // 鼠标离开卡片区域
-        card.addEventListener('mouseleave', function(e) {
-            // 清除定时器
-            if (hoverTimer) {
-                clearTimeout(hoverTimer);
-                hoverTimer = null;
-            }
-        });
-
-        // 点击卡片区域（非按钮区域）
-        card.addEventListener('click', function(e) {
-            // 检查点击的目标是否是下载按钮或其子元素
-            if (e.target.classList.contains('download-btn') || e.target.closest('.download-btn')) {
-                // 如果点击的是按钮，不触发放大
-                return;
-            }
-
-            // 如果点击的是卡片其他区域，则放大
-            if (!isEnlarged) {
-                enlargeCard(this);
-                isEnlarged = true;
-            }
-        });
-
-        // 点击放大后的卡片，缩小回去
-        card.addEventListener('click', function(e) {
-            if (isEnlarged && this.classList.contains('enlarged')) {
-                // 检查是否点击的是按钮（防止意外关闭）
-                if (e.target.classList.contains('download-btn') || e.target.closest('.download-btn')) {
-                    // 如果点击按钮，允许默认行为（跳转链接），不关闭
-                    return;
-                }
-                
-                // 如果点击的是放大后的卡片其他区域，则缩小
-                shrinkCard(this);
-                isEnlarged = false;
-            }
-        });
-
-        // 辅助函数：放大卡片
-        function enlargeCard(cardElement) {
-            cardElement.classList.add('enlarged');
-            document.body.classList.add('enlarged-active'); // 防止背景滚动
-        }
-
-        // 辅助函数：缩小卡片
-        function shrinkCard(cardElement) {
-            cardElement.classList.remove('enlarged');
-            document.body.classList.remove('enlarged-active');
-        }
-    });
-});
-</script>
